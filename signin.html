@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signin</title>
+
+    <!-- Lien avec le css -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Lien avec le javascript -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+  <!-- Bulles décoratives en arrière-plan (purement visuelles) -->
+  <div class="bg-decor" aria-hidden="true">
+    <span class="bg-decor__circle bg-decor__circle--1"></span>
+    <span class="bg-decor__circle bg-decor__circle--2"></span>
+    <span class="bg-decor__circle bg-decor__circle--3"></span>
+    <span class="bg-decor__circle bg-decor__circle--4"></span>
+  </div>
+
+  <main class="page">
+    <div class="card">
+
+      <!-- ==================== EN-TÊTE DE LA CARTE ==================== -->
+      <header class="card__header">
+        <h1 class="card__title" id="formTitle">Sign in</h1>
+        <p class="card__member">
+          New here? <a href="signup.html" class="link">Sign up</a>
+        </p>
+      </header>
+
+      <p class="card__subtitle">Welcome back, please enter your details.</p>
+
+      <!-- ==================== FORMULAIRE ==================== -->
+      <form id="signinForm" novalidate aria-labelledby="formTitle">
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter Email Address" autocomplete="username" required>
+          <span class="field__error" data-error-for="email"></span>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="password" name="password" placeholder="Enter Password" autocomplete="current-password" required minlength="6">
+            <button type="button" class="password-wrap__toggle" id="togglePassword" aria-label="Afficher le mot de passe" aria-pressed="false">
+              <svg class="icon-eye" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg class="icon-eye-off" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" hidden>
+                <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a20.6 20.6 0 0 1 5.06-5.94M9.9 4.24A10.4 10.4 0 0 1 12 4c7 0 11 7 11 7a20.7 20.7 0 0 1-3.22 4.36M14.12 14.12a3 3 0 1 1-4.24-4.24"/>
+                <path d="M1 1l22 22"/>
+              </svg>
+            </button>
+          </div>
+          <span class="field__error" data-error-for="password"></span>
+        </div>
+
+        <div class="form-options">
+          <label class="checkbox">
+            <input type="checkbox" id="remember">
+            <span class="checkbox__box"></span>
+            Remember me
+          </label>
+          <a href="#" class="link">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--wide btn--full" id="submitBtn">
+          <span class="btn__label">Sign In</span>
+          <span class="btn__spinner" hidden></span>
+        </button>
+
+        <div class="divider"><span>or continue with</span></div>
+
+        <div class="social-row">
+          <button type="button" class="btn btn--social">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.3-1.7 3.8-5.5 3.8-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.2.8 3.9 1.5l2.6-2.5C16.9 3.2 14.7 2.2 12 2.2 6.9 2.2 2.7 6.4 2.7 11.6S6.9 21 12 21c6.9 0 9.3-4.8 9.3-7.3 0-.5 0-.9-.1-1.3H12Z"/></svg>
+            Google
+          </button>
+          <button type="button" class="btn btn--social">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#1877F2" d="M22 12.06C22 6.5 17.5 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.55V9.85c0-2.52 1.5-3.91 3.8-3.91 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.9h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z"/></svg>
+            Facebook
+          </button>
+        </div>
+      </form>
+
+      <!-- ---------- ÉCRAN DE CONFIRMATION (affiché après connexion simulée) ---------- -->
+      <div class="signin-success" id="signinSuccess" hidden>
+        <div class="signin-success__icon" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 class="card__title">Welcome back!</h2>
+        <p class="card__subtitle">You have been signed in successfully.</p>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
