@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signup</title>
+
+    <!-- Lien avec le css -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Lien avec le javascript -->
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+  <!-- Bulles décoratives en arrière-plan (purement visuelles) -->
+  <div class="bg-decor" aria-hidden="true">
+    <span class="bg-decor__circle bg-decor__circle--1"></span>
+    <span class="bg-decor__circle bg-decor__circle--2"></span>
+    <span class="bg-decor__circle bg-decor__circle--3"></span>
+    <span class="bg-decor__circle bg-decor__circle--4"></span>
+  </div>
+
+  <main class="page">
+    <div class="card" role="form" aria-labelledby="formTitle">
+
+      <!-- ==================== EN-TÊTE DE LA CARTE ==================== -->
+      <header class="card__header">
+        <h1 class="card__title" id="formTitle">Sign up</h1>
+        <p class="card__member">
+          Already a Member? <a href="signin.html" class="link">Sign in</a>
+        </p>
+      </header>
+
+      <!-- ==================== INDICATEUR DE PROGRESSION ==================== -->
+      <ol class="stepper" id="stepper" aria-label="Progression de l'inscription">
+        <li class="stepper__item is-active" data-step-indicator="1">
+          <span class="stepper__circle">1</span>
+          <span class="stepper__label">Basic Details</span>
+        </li>
+        <li class="stepper__line" aria-hidden="true"><span class="stepper__line-fill"></span></li>
+        <li class="stepper__item" data-step-indicator="2">
+          <span class="stepper__circle">2</span>
+          <span class="stepper__label">Contact Details</span>
+        </li>
+        <li class="stepper__line" aria-hidden="true"><span class="stepper__line-fill"></span></li>
+        <li class="stepper__item" data-step-indicator="3">
+          <span class="stepper__circle">3</span>
+          <span class="stepper__label">Verification</span>
+        </li>
+      </ol>
+
+      <!-- ==================== FORMULAIRE ==================== -->
+      <form id="signupForm" novalidate>
+
+        <!-- ---------- ÉTAPE 1 : BASIC DETAILS ---------- -->
+        <section class="form-step is-active" data-step="1" aria-labelledby="step1Title">
+          <h2 class="form-step__title" id="step1Title">Basic Details</h2>
+
+          <div class="form-row form-row--photo">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" name="fullName" placeholder="Enter Full Name" required>
+              <span class="field__error" data-error-for="fullName"></span>
+            </div>
+
+            <div class="photo-upload">
+              <button type="button" class="photo-upload__btn" id="photoBtn" aria-label="Ajouter une photo de profil">
+                <img class="photo-upload__preview" id="photoPreview" alt="" hidden>
+                <svg class="photo-upload__icon" id="photoIcon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                  <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+                  <circle cx="12" cy="13" r="3.5"/>
+                </svg>
+              </button>
+              <input type="file" id="photoInput" accept="image/*" hidden>
+              <span class="photo-upload__label">Add Photo</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field field--icon">
+              <label for="constituency">Constituency</label>
+              <input type="text" id="constituency" name="constituency" placeholder="Search Constituency">
+              <svg class="field__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="field">
+              <label for="party">Select Party You Work For</label>
+              <select id="party" name="party">
+                <option value="" selected>- Select Party -</option>
+                <option value="party-a">Parti A</option>
+                <option value="party-b">Parti B</option>
+                <option value="party-c">Parti C</option>
+                <option value="independent">Indépendant</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="position">Position</label>
+              <select id="position" name="position">
+                <option value="" selected>- Select -</option>
+                <option value="candidate">Candidat</option>
+                <option value="agent">Agent électoral</option>
+                <option value="volunteer">Bénévole</option>
+                <option value="coordinator">Coordinateur</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row form-row--split">
+            <div class="field">
+              <label for="dob">Date Of Birth</label>
+              <input type="date" id="dob" name="dob">
+            </div>
+            <div class="field">
+              <span class="field__legend">Gender</span>
+              <div class="radio-group">
+                <label class="radio">
+                  <input type="radio" name="gender" value="male" checked>
+                  <span class="radio__dot"></span> Male
+                </label>
+                <label class="radio">
+                  <input type="radio" name="gender" value="female">
+                  <span class="radio__dot"></span> Female
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="vision">Vision &amp; Mission</label>
+              <textarea id="vision" name="vision" rows="3" placeholder="Type Here..."></textarea>
+            </div>
+          </div>
+
+          <!-- ---------- BLOC ÉDUCATION (dynamique) ---------- -->
+          <div class="education">
+            <div class="education__header">
+              <h3>Education</h3>
+              <button type="button" class="link link--btn" id="addEducationBtn">+ Add Another Education</button>
+            </div>
+
+            <!-- Formulaire d'ajout / édition d'un diplôme -->
+            <div class="education__form" id="educationForm" hidden>
+              <div class="form-row form-row--triple">
+                <div class="field">
+                  <label for="eduDegree">Degree</label>
+                  <input type="text" id="eduDegree" placeholder="Enter Degree">
+                </div>
+                <div class="field">
+                  <label for="eduCollege">College / University</label>
+                  <input type="text" id="eduCollege" placeholder="Enter Collage / University">
+                </div>
+                <div class="field">
+                  <label for="eduYear">Graduation Year</label>
+                  <input type="date" id="eduYear">
+                </div>
+              </div>
+              <div class="education__form-actions">
+                <button type="button" class="btn btn--ghost" id="eduCancelBtn">Cancel</button>
+                <button type="button" class="btn btn--primary btn--small" id="eduSaveBtn">Save</button>
+              </div>
+            </div>
+
+            <!-- Liste des diplômes déjà enregistrés (générée par script.js) -->
+            <ul class="education__list" id="educationList" aria-live="polite"></ul>
+          </div>
+
+          <div class="form-step__footer">
+            <button type="button" class="btn btn--primary btn--wide" data-next-step>Save &amp; Continue</button>
+          </div>
+        </section>
+
+        <!-- ---------- ÉTAPE 2 : CONTACT DETAILS ---------- -->
+        <section class="form-step" data-step="2" aria-labelledby="step2Title">
+          <h2 class="form-step__title" id="step2Title">Contact Details</h2>
+
+          <div class="form-row form-row--split">
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="Enter Email Address" required>
+              <span class="field__error" data-error-for="email"></span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="Enter Phone Number" required>
+              <span class="field__error" data-error-for="phone"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="address">Full Address</label>
+              <input type="text" id="address" name="address" placeholder="Enter Full Address">
+            </div>
+          </div>
+
+          <div class="form-row form-row--triple">
+            <div class="field">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" placeholder="Enter City">
+            </div>
+            <div class="field">
+              <label for="region">State / Region</label>
+              <input type="text" id="region" name="region" placeholder="Enter State / Region">
+            </div>
+            <div class="field">
+              <label for="postal">Postal Code</label>
+              <input type="text" id="postal" name="postal" placeholder="Enter Postal Code">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="country">Country</label>
+              <select id="country" name="country">
+                <option value="" selected>- Select Country -</option>
+                <option value="cm">Cameroun</option>
+                <option value="fr">France</option>
+                <option value="ca">Canada</option>
+                <option value="other">Autre</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-step__footer form-step__footer--split">
+            <button type="button" class="btn btn--ghost" data-prev-step>Back</button>
+            <button type="button" class="btn btn--primary btn--wide" data-next-step>Save &amp; Continue</button>
+          </div>
+        </section>
+
+        <!-- ---------- ÉTAPE 3 : VERIFICATION ---------- -->
+        <section class="form-step" data-step="3" aria-labelledby="step3Title">
+          <h2 class="form-step__title" id="step3Title">Verification</h2>
+          <p class="form-step__hint">
+            We sent a 6-digit verification code to your email address. Enter it below to confirm your identity.
+          </p>
+
+          <div class="otp-group" id="otpGroup" aria-label="Code de vérification à 6 chiffres">
+            <input type="text" inputmode="numeric" maxlength="1" class="otp-group__input" data-otp-index="0">
+            <input type="text" inputmode="numeric" maxlength="1" class="otp-group__input" data-otp-index="1">
+            <input type="text" inputmode="numeric" maxlength="1" class="otp-group__input" data-otp-index="2">
+            <input type="text" inputmode="numeric" maxlength="1" class="otp-group__input" data-otp-index="3">
+            <input type="text" inputmode="numeric" maxlength="1" class="otp-group__input" data-otp-index="4">
+            <input type="text" inputmode="numeric" maxlength="1" class="otp-group__input" data-otp-index="5">
+          </div>
+          <span class="field__error" data-error-for="otp"></span>
+
+          <p class="otp-resend">
+            Didn't receive the code?
+            <button type="button" class="link link--btn" id="resendCodeBtn">Resend Code</button>
+          </p>
+
+          <label class="checkbox">
+            <input type="checkbox" id="terms" required>
+            <span class="checkbox__box"></span>
+            I agree to the <a href="#" class="link">Terms &amp; Conditions</a>
+          </label>
+          <span class="field__error" data-error-for="terms"></span>
+
+          <div class="form-step__footer form-step__footer--split">
+            <button type="button" class="btn btn--ghost" data-prev-step>Back</button>
+            <button type="submit" class="btn btn--primary btn--wide" id="submitBtn">Submit</button>
+          </div>
+        </section>
+
+        <!-- ---------- ÉCRAN DE CONFIRMATION FINALE ---------- -->
+        <section class="form-step form-success" data-step="success" aria-labelledby="successTitle">
+          <div class="form-success__icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h2 class="form-step__title" id="successTitle">Registration complete!</h2>
+          <p class="form-step__hint">Thank you, your account has been created successfully.</p>
+        </section>
+
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>
